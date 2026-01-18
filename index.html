@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Ibrahim Mamedov's Research Hub</title>
+    <title>Home | Ibrahim Mamedov</title>
     <style>
         :root {
             --black: #000000;
@@ -9,191 +9,92 @@
             --grey-dark: #333333;
             --grey-mid: #808080;
             --grey-light: #eeeeee;
-            --sidebar-width: 340px;
         }
 
         body {
             margin: 0;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: 'Segoe UI', system-ui, sans-serif;
             background-color: var(--grey-light);
             display: flex;
             flex-direction: column;
             height: 100vh;
-            color: var(--black);
         }
 
         header {
-            /* Slow gradient from White to Grey to Black */
-            background: linear-gradient(90deg, 
-                rgba(255,255,255,1) 0%, 
-                rgba(128,128,128,1) 50%, 
-                rgba(0,0,0,1) 100%);
+            background: linear-gradient(90deg, #fff 0%, #808080 50%, #000 100%);
             padding: 1.2rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            z-index: 10;
-            border-bottom: 1px solid var(--grey-mid);
         }
 
-        header h1 { color: #222; margin: 0; font-size: 1.8rem; }
-        header p { color: #444; margin: 5px 0 0 0; font-weight: bold; letter-spacing: 1px; }
-        
-        .baguette-logo { 
-            color: white; 
-            font-size: 2.5rem; 
-            filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.5));
-            transition: transform 0.5s ease;
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: bold;
+            border-bottom: 2px solid transparent;
         }
-        .baguette-logo:hover { transform: rotate(10deg) scale(1.1); }
 
-        .main-container {
-            display: flex;
+        .nav-links a:hover { border-bottom: 2px solid white; }
+
+        .hero {
             flex: 1;
-            overflow: hidden;
-        }
-
-        /* Sidebar Styling */
-        nav {
-            width: var(--sidebar-width);
-            background: var(--white);
-            border-right: 1px solid var(--grey-mid);
             display: flex;
             flex-direction: column;
-            padding: 25px;
-            box-sizing: border-box;
-            overflow-y: auto;
-        }
-
-        nav h3 { 
-            margin-top: 0; 
-            font-size: 1.2rem; 
-            border-bottom: 2px solid var(--grey-light); 
-            padding-bottom: 10px; 
-            color: var(--black);
-        }
-
-        /* Grey Document Boxes */
-        .pdf-link {
-            padding: 15px;
-            margin-bottom: 12px;
-            background: var(--grey-light);
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            border: 1px solid #ccc;
-            text-align: left;
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--grey-dark);
-        }
-
-        .pdf-link:hover { 
-            background: #d0d0d0;
-            transform: translateX(5px);
-        }
-
-        .pdf-link.active {
-            background: var(--black);
-            color: var(--white);
-            border-color: var(--black);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        }
-
-        /* Viewer Area */
-        .viewer-area {
-            flex: 1;
-            background: var(--grey-dark); 
-            padding: 15px;
-            display: flex;
-        }
-
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            border-radius: 8px;
-            background: white;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
-        }
-
-        .bread-footer {
-            margin-top: auto; 
-            padding: 20px; 
-            background: var(--grey-light); 
-            border-radius: 10px; 
-            border: 1px dashed var(--grey-mid); 
+            justify-content: center;
+            align-items: center;
             text-align: center;
+            padding: 20px;
         }
+
+        .welcome-card {
+            background: white;
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 600px;
+        }
+
+        .btn-enter {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 15px 40px;
+            background: var(--black);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+
+        .btn-enter:hover { transform: scale(1.05); background: var(--grey-dark); }
     </style>
 </head>
 <body>
 
     <header>
         <div>
-            <h1>Ibrahim Mamedov's Research Hub</h1>
-            <p>TEST TEXT SOMETHING ABOUT FRENCH BREAD 🥖</p>
+            <h1 style="margin:0; font-size: 1.8rem; color: #222;">Ibrahim Mamedov</h1>
+            <p style="margin:0; font-weight: bold; color: #444;">FRENCH BREAD & SCIENCE 🥖</p>
         </div>
-        <div class="baguette-logo">BAGUETTE 😎</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="SCI-Fair-Research-Templates.html">Templates</a>
+        </div>
     </header>
 
-    <div class="main-container">
-        <nav id="sidebar">
-            <h3>🥖 Research Inventory</h3>
-            
-            <button class="pdf-link active" onclick="loadExternalPDF(this, 'Abstract_Template.pdf')">
-                🥖 Abstract Template
-            </button>
-            
-            <button class="pdf-link" onclick="loadExternalPDF(this, 'Project_Board_Template.pdf')">
-                🥖 Project Board Template
-            </button>
-
-            <button class="pdf-link" onclick="loadExternalPDF(this, 'Manuscript_Template.pdf')">
-                🥖 Manuscript Template
-            </button>
-
-            <button class="pdf-link" onclick="loadExternalPDF(this, 'Participant_Images_Template.pdf')">
-                🥖 Participant Images Template
-            </button>
-
-            <button class="pdf-link" onclick="loadExternalPDF(this, 'Project_Brochure_Template.pdf')">
-                🥖 Project Brochure Template
-            </button>
-
-            <div class="bread-footer">
-                <p style="margin:0; font-style: italic; font-size: 0.85rem; color: var(--grey-dark);">
-                    "A day without research is like a day without a baguette."
-                </p>
-            </div>
-        </nav>
-
-        <div class="viewer-area">
-            <iframe 
-                id="main-viewer"
-                src="">
-            </iframe>
+    <div class="hero">
+        <div class="welcome-card">
+            <h2 style="font-size: 2.5rem;">Welcome 😎</h2>
+            <p style="font-size: 1.2rem; color: var(--grey-dark);">
+                Explore the intersection of scientific rigor and high-quality baguettes. 
+                Navigate to the Templates section to view my research documents.
+            </p>
+            <a href="SCI-Fair-Research-Templates.html" class="btn-enter">View Research Templates 🥖</a>
         </div>
     </div>
-
-    <script>
-        const GITHUB_RAW_BASE = "https://raw.githubusercontent.com/ibrahim-mamedov/SCI-Fair-Research-Templates/main/";
-
-        function loadExternalPDF(button, fileName) {
-            document.querySelectorAll('.pdf-link').forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
-
-            const fullPdfUrl = GITHUB_RAW_BASE + fileName;
-            const viewer = document.getElementById('main-viewer');
-            viewer.src = `pdfjs/web/viewer.html?file=${encodeURIComponent(fullPdfUrl)}`;
-        }
-
-        window.onload = () => {
-            const firstBtn = document.querySelector('.pdf-link');
-            loadExternalPDF(firstBtn, 'Abstract_Template.pdf');
-        };
-    </script>
 
 </body>
 </html>
