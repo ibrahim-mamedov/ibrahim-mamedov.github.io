@@ -31,14 +31,28 @@
             z-index: 10;
         }
 
+        .header-left h1 { margin:0; font-size: 1.8rem; color: #222; }
+        .header-left p { margin:5px 0 0 0; font-weight: bold; letter-spacing: 1px; color: #444; }
+
+        .header-right { display: flex; align-items: center; gap: 30px; }
+
         .nav-links a {
             color: white;
             text-decoration: none;
-            margin-left: 20px;
             font-weight: bold;
             border-bottom: 2px solid transparent;
+            transition: 0.3s;
         }
         .nav-links a:hover { border-bottom: 2px solid white; }
+
+        .baguette-logo { 
+            color: white; 
+            font-size: 2.5rem; 
+            filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.5));
+            transition: transform 0.5s ease;
+            cursor: default;
+        }
+        .baguette-logo:hover { transform: rotate(15deg) scale(1.2); }
 
         .main-container {
             display: flex;
@@ -46,7 +60,7 @@
             overflow: hidden;
         }
 
-        nav {
+        nav#sidebar {
             width: var(--sidebar-width);
             background: var(--white);
             border-right: 1px solid var(--grey-mid);
@@ -69,7 +83,6 @@
             font-size: 14px;
             font-weight: 600;
         }
-
         .pdf-link:hover { background: #d0d0d0; transform: translateX(5px); }
         .pdf-link.active { background: var(--black); color: var(--white); border-color: var(--black); }
 
@@ -82,13 +95,16 @@
 <body>
 
     <header>
-        <div>
-            <h1 style="margin:0; font-size: 1.8rem; color: #222;">Research Archive</h1>
-            <p style="margin:0; font-weight: bold; color: #444;">BAGUETTE 😎</p>
+        <div class="header-left">
+            <h1>Ibrahim Mamedov</h1>
+            <p>TEST TEXT SOMETHING ABOUT FRENCH BREAD 🥖</p>
         </div>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="SCI-Fair-Research-Templates.html">Templates</a>
+        <div class="header-right">
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="SCI-Fair-Research-Templates.html">Templates</a>
+            </nav>
+            <div class="baguette-logo">BAGUETTE 😎</div>
         </div>
     </header>
 
