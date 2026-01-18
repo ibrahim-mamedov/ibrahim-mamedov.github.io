@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Templates | Ibrahim Mamedov</title>
+    <style>
+        :root {
+            --black: #000000;
+            --white: #ffffff;
+            --grey-dark: #333333;
+            --grey-mid: #808080;
+            --grey-light: #eeeeee;
+            --sidebar-width: 340px;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: var(--grey-light);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(90deg, #fff 0%, #808080 50%, #000 100%);
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: bold;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-links a:hover { border-bottom: 2px solid white; }
+
+        .main-container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        nav {
+            width: var(--sidebar-width);
+            background: var(--white);
+            border-right: 1px solid var(--grey-mid);
+            display: flex;
+            flex-direction: column;
+            padding: 25px;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        .pdf-link {
+            padding: 15px;
+            margin-bottom: 12px;
+            background: var(--grey-light);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid #ccc;
+            text-align: left;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .pdf-link:hover { background: #d0d0d0; transform: translateX(5px); }
+        .pdf-link.active { background: var(--black); color: var(--white); border-color: var(--black); }
+
+        .viewer-area { flex: 1; background: var(--grey-dark); padding: 15px; display: flex; }
+        iframe { width: 100%; height: 100%; border: none; border-radius: 8px; background: white; }
+
+        .bread-footer { margin-top: auto; padding: 20px; background: var(--grey-light); border-radius: 10px; border: 1px dashed var(--grey-mid); text-align: center; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div>
+            <h1 style="margin:0; font-size: 1.8rem; color: #222;">Research Archive</h1>
+            <p style="margin:0; font-weight: bold; color: #444;">BAGUETTE 😎</p>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="SCI-Fair-Research-Templates.html">Templates</a>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <nav id="sidebar">
+            <h3>🥖 Research Inventory</h3>
+            <button class="pdf-link active" onclick="loadPDF(this, 'Abstract_Template.pdf')">🥖 Abstract Template</button>
+            <button class="pdf-link" onclick="loadPDF(this, 'Project_Board_Template.pdf')">🥖 Project Board</button>
+            <button class="pdf-link" onclick="loadPDF(this, 'Manuscript_Template.pdf')">🥖 Manuscript</button>
+            <button class="pdf-link" onclick="loadPDF(this, 'Participant_Images_Template.pdf')">🥖 Participant Images</button>
+            <button class="pdf-link" onclick="loadPDF(this, 'Project_Brochure_Template.pdf')">🥖 Project Brochure</button>
+
+            <div class="bread-footer">
+                <p style="margin:0; font-style: italic; font-size: 0.85rem; color: var(--grey-dark);">"A day without research is like a day without a baguette."</p>
+            </div>
+        </nav>
+
+        <div class="viewer-area">
+            <iframe id="main-viewer" src=""></iframe>
+        </div>
+    </div>
+
+    <script>
+        const GITHUB_RAW_BASE = "https://raw.githubusercontent.com/ibrahim-mamedov/SCI-Fair-Research-Templates/main/";
+        function loadPDF(button, fileName) {
+            document.querySelectorAll('.pdf-link').forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            const fullPdfUrl = GITHUB_RAW_BASE + fileName;
+            document.getElementById('main-viewer').src = `pdfjs/web/viewer.html?file=${encodeURIComponent(fullPdfUrl)}`;
+        }
+        window.onload = () => loadPDF(document.querySelector('.pdf-link'), 'Abstract_Template.pdf');
+    </script>
+</body>
+</html>
