@@ -1,29 +1,184 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Ibrahim Mamedov's github page</title>
+<head>
+    <title>Ibrahim Mamedov's Research Hub</title>
     <style>
-      body { margin: 0; padding: 20px; font-family: sans-serif; }
-      .viewer-container {
-        width: 100%;
-        height: 800px;
-        border: 1px solid #ccc;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>TEST TEXT SOMETHING ABOUT FRENCH BREAD</h1>
-    <p>BAGUETTE 😎</p>
+        :root {
+            --primary: #2c3e50;
+            --accent: #d35400; /* Crusty bread orange */
+            --bg: #fdf5e6;    /* Flour/Dough white */
+            --sidebar-width: 340px;
+        }
 
-    <div class="viewer-container">
-      <iframe 
-        id="pdf-viewer"
-        src="pdfjs/web/viewer.html?file=https://raw.githubusercontent.com/ibrahim-mamedov/SCI-Fair-Research-Templates/main/Abstract%20Template.pdf" 
-        width="100%" 
-        height="100%" 
-        style="border: none;">
-      </iframe>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            color: var(--primary);
+        }
+
+        header {
+            background: linear-gradient(90deg, #2c3e50 0%, #8e44ad 100%);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 10;
+        }
+
+        .main-container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        /* Sidebar Styling */
+        nav {
+            width: var(--sidebar-width);
+            background: white;
+            border-right: 1px solid #ddd;
+            display: flex;
+            flex-direction: column;
+            padding: 25px;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        nav h3 { margin-top: 0; font-size: 1.2rem; border-bottom: 2px solid var(--bg); padding-bottom: 10px; }
+
+        .pdf-link {
+            padding: 15px;
+            margin-bottom: 12px;
+            background: #fff9f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid #f3e5ab;
+            text-align: left;
+            font-size: 14px;
+            font-weight: 600;
+            color: #5d4037;
+        }
+
+        .pdf-link:hover { 
+            background: #f3e5ab;
+            transform: scale(1.02);
+        }
+
+        .pdf-link.active {
+            background: var(--accent);
+            color: white;
+            border-color: #a04000;
+            box-shadow: 0 4px 12px rgba(211, 84, 0, 0.4);
+        }
+
+        /* Viewer Area */
+        .viewer-area {
+            flex: 1;
+            background: #525659; 
+            padding: 15px;
+            display: flex;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 8px;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        /* Fun Baguette Animation */
+        .baguette-logo {
+            font-size: 2.5rem;
+            filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.5));
+            cursor: default;
+            transition: transform 0.5s ease;
+        }
+        .baguette-logo:hover {
+            transform: rotate(15deg) scale(1.2);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div>
+            <h1 style="margin:0; font-size: 1.8rem;">Ibrahim Mamedov's Research Hub</h1>
+            <p style="margin:5px 0 0 0; font-weight: bold; letter-spacing: 1px;">TEST TEXT SOMETHING ABOUT FRENCH BREAD 🥖</p>
+        </div>
+        <div class="baguette-logo">BAGUETTE 😎</div>
+    </header>
+
+    <div class="main-container">
+        <nav id="sidebar">
+            <h3>🥖 Research Inventory</h3>
+            
+            <button class="pdf-link active" onclick="loadExternalPDF(this, 'Abstract_Template.pdf')">
+                🥖 Abstract Template
+            </button>
+            
+            <button class="pdf-link" onclick="loadExternalPDF(this, 'Project_Board_Template.pdf')">
+                🥖 Project Board Template
+            </button>
+
+            <button class="pdf-link" onclick="loadExternalPDF(this, 'Manuscript_Template.pdf')">
+                🥖 Manuscript Template
+            </button>
+
+            <button class="pdf-link" onclick="loadExternalPDF(this, 'Participant_Images_Template.pdf')">
+                🥖 Participant Images Template
+            </button>
+
+            <button class="pdf-link" onclick="loadExternalPDF(this, 'Project_Brochure_Template.pdf')">
+                🥖 Project Brochure Template
+            </button>
+
+            <div style="margin-top: auto; padding: 20px; background: #fffbe6; border-radius: 10px; border: 1px dashed #d35400; text-align: center;">
+                <p style="margin:0; font-style: italic; font-size: 0.85rem; color: #5d4037;">
+                    "A day without research is like a day without a baguette."
+                </p>
+            </div>
+        </nav>
+
+        <div class="viewer-area">
+            <iframe 
+                id="main-viewer"
+                src="">
+            </iframe>
+        </div>
     </div>
 
-  </body>
+    <script>
+        // Updated Base URL to your specific GitHub Repo
+        const GITHUB_RAW_BASE = "https://raw.githubusercontent.com/ibrahim-mamedov/SCI-Fair-Research-Templates/main/";
+
+        function loadExternalPDF(button, fileName) {
+            // 1. UI Update: Set active button state
+            document.querySelectorAll('.pdf-link').forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            // 2. Build the full URL pointing to the other repo
+            const fullPdfUrl = GITHUB_RAW_BASE + fileName;
+            
+            // 3. Update Iframe using the local PDF.js viewer
+            // encodeURIComponent ensures the URL slashes don't break the query string
+            const viewer = document.getElementById('main-viewer');
+            viewer.src = `pdfjs/web/viewer.html?file=${encodeURIComponent(fullPdfUrl)}`;
+        }
+
+        // Load the first PDF automatically when the page opens
+        window.onload = () => {
+            const firstBtn = document.querySelector('.pdf-link');
+            loadExternalPDF(firstBtn, 'Abstract_Template.pdf');
+        };
+    </script>
+
+</body>
 </html>
