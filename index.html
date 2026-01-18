@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Templates | Ibrahim Mamedov</title>
+    <title>Home | Ibrahim Mamedov</title>
     <style>
         :root {
             --black: #000000;
@@ -9,7 +9,6 @@
             --grey-dark: #333333;
             --grey-mid: #808080;
             --grey-light: #eeeeee;
-            --sidebar-width: 340px;
         }
 
         body {
@@ -28,98 +27,78 @@
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            z-index: 10;
         }
 
+        .header-left h1 { margin:0; font-size: 1.5rem; color: #222; }
         .nav-links a {
             color: white;
             text-decoration: none;
-            margin-left: 20px;
             font-weight: bold;
+            margin-left: 20px;
             border-bottom: 2px solid transparent;
+            transition: 0.3s;
         }
         .nav-links a:hover { border-bottom: 2px solid white; }
 
-        .main-container {
-            display: flex;
+        .hero {
             flex: 1;
-            overflow: hidden;
-        }
-
-        nav {
-            width: var(--sidebar-width);
-            background: var(--white);
-            border-right: 1px solid var(--grey-mid);
             display: flex;
             flex-direction: column;
-            padding: 25px;
-            box-sizing: border-box;
-            overflow-y: auto;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle, #ffffff 0%, #e0e0e0 100%);
         }
 
-        .pdf-link {
-            padding: 15px;
-            margin-bottom: 12px;
-            background: var(--grey-light);
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            border: 1px solid #ccc;
-            text-align: left;
-            font-size: 14px;
-            font-weight: 600;
+        /* The Giant Animated Logo for the Homepage */
+        .big-baguette {
+            font-size: 8rem;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: default;
+            margin-bottom: 20px;
         }
+        .big-baguette:hover { transform: rotate(360deg) scale(1.2); }
 
-        .pdf-link:hover { background: #d0d0d0; transform: translateX(5px); }
-        .pdf-link.active { background: var(--black); color: var(--white); border-color: var(--black); }
+        .welcome-card h2 { font-size: 3rem; margin: 0; color: var(--black); }
+        .welcome-card p { font-size: 1.2rem; color: var(--grey-dark); font-weight: bold; margin: 10px 0; }
 
-        .viewer-area { flex: 1; background: var(--grey-dark); padding: 15px; display: flex; }
-        iframe { width: 100%; height: 100%; border: none; border-radius: 8px; background: white; }
-
-        .bread-footer { margin-top: auto; padding: 20px; background: var(--grey-light); border-radius: 10px; border: 1px dashed var(--grey-mid); text-align: center; }
+        .btn-enter {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 20px 50px;
+            background: var(--black);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .btn-enter:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.4); }
     </style>
 </head>
 <body>
 
     <header>
-        <div>
-            <h1 style="margin:0; font-size: 1.8rem; color: #222;">Research Archive</h1>
-            <p style="margin:0; font-weight: bold; color: #444;">BAGUETTE 😎</p>
+        <div class="header-left">
+            <h1>Ibrahim Mamedov</h1>
         </div>
-        <div class="nav-links">
+        <nav class="nav-links">
             <a href="index.html">Home</a>
             <a href="SCI-Fair-Research-Templates.html">Templates</a>
-        </div>
+        </nav>
     </header>
 
-    <div class="main-container">
-        <nav id="sidebar">
-            <h3>🥖 Research Inventory</h3>
-            <button class="pdf-link active" onclick="loadPDF(this, 'Abstract_Template.pdf')">🥖 Abstract Template</button>
-            <button class="pdf-link" onclick="loadPDF(this, 'Project_Board_Template.pdf')">🥖 Project Board</button>
-            <button class="pdf-link" onclick="loadPDF(this, 'Manuscript_Template.pdf')">🥖 Manuscript</button>
-            <button class="pdf-link" onclick="loadPDF(this, 'Participant_Images_Template.pdf')">🥖 Participant Images</button>
-            <button class="pdf-link" onclick="loadPDF(this, 'Project_Brochure_Template.pdf')">🥖 Project Brochure</button>
-
-            <div class="bread-footer">
-                <p style="margin:0; font-style: italic; font-size: 0.85rem; color: var(--grey-dark);">"A day without research is like a day without a baguette."</p>
-            </div>
-        </nav>
-
-        <div class="viewer-area">
-            <iframe id="main-viewer" src=""></iframe>
+    <div class="hero">
+        <div class="big-baguette">BAGUETTE 😎</div>
+        <div class="welcome-card">
+            <h2>WELCOME</h2>
+            <p>TEST TEXT SOMETHING ABOUT FRENCH BREAD 🥖</p>
+            <a href="SCI-Fair-Research-Templates.html" class="btn-enter">ENTER RESEARCH HUB</a>
         </div>
     </div>
 
-    <script>
-        const GITHUB_RAW_BASE = "https://raw.githubusercontent.com/ibrahim-mamedov/SCI-Fair-Research-Templates/main/";
-        function loadPDF(button, fileName) {
-            document.querySelectorAll('.pdf-link').forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
-            const fullPdfUrl = GITHUB_RAW_BASE + fileName;
-            document.getElementById('main-viewer').src = `pdfjs/web/viewer.html?file=${encodeURIComponent(fullPdfUrl)}`;
-        }
-        window.onload = () => loadPDF(document.querySelector('.pdf-link'), 'Abstract_Template.pdf');
-    </script>
 </body>
 </html>
