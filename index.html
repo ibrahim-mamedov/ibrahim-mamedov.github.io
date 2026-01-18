@@ -19,27 +19,22 @@
             flex-direction: column;
             height: 100vh;
         }
-/* Keep the header structure identical */
-header {
-    background: linear-gradient(90deg, #fff 0%, #808080 50%, #000 100%);
-    padding: 1.2rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 70px; /* Force a consistent height */
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
 
-/* Hide the French Bread text but keep its 'footprint' so nothing shifts */
-.header-left p.hidden {
-    visibility: hidden;
-}
+        /* HEADER: Matched 1:1 to Templates Page */
+        header {
+            background: linear-gradient(90deg, #fff 0%, #808080 50%, #000 100%);
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
 
-/* Hide the logo but keep its 'footprint' so the Nav links don't move */
-.baguette-logo.hidden {
-    visibility: hidden;
-    pointer-events: none; /* Can't click/hover it */
-}
+        .header-left h1 { margin:0; font-size: 1.8rem; color: #222; }
+        .header-left p { margin:5px 0 0 0; font-weight: bold; letter-spacing: 1px; color: #444; }
+
+        .header-right { display: flex; align-items: center; gap: 30px; }
 
         .nav-links a {
             color: white;
@@ -58,6 +53,13 @@ header {
             cursor: default;
         }
 
+        /* Logic to keep layout identical while hiding elements */
+        .hidden {
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        /* HERO SECTION */
         .hero {
             flex: 1;
             display: flex;
@@ -68,7 +70,6 @@ header {
             background: radial-gradient(circle, #ffffff 0%, #e0e0e0 100%);
         }
 
-        /* The Giant Animated Logo for the Homepage */
         .big-baguette {
             font-size: 8rem;
             filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));
@@ -99,19 +100,19 @@ header {
 </head>
 <body>
 
-<header>
-    <div class="header-left">
-        <h1>Ibrahim Mamedov</h1>
-        <p class="hidden">TEST TEXT SOMETHING ABOUT FRENCH BREAD 🥖</p>
-    </div>
-    <div class="header-right">
-        <nav class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="SCI-Fair-Research-Templates.html">Templates</a>
-        </nav>
-        <div class="baguette-logo hidden">BAGUETTE 😎</div>
-    </div>
-</header>
+    <header>
+        <div class="header-left">
+            <h1>Ibrahim Mamedov</h1>
+            <p class="hidden">TEST TEXT SOMETHING ABOUT FRENCH BREAD 🥖</p>
+        </div>
+        <div class="header-right">
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="SCI-Fair-Research-Templates.html">Templates</a>
+            </nav>
+            <div class="baguette-logo hidden">BAGUETTE 😎</div>
+        </div>
+    </header>
 
     <div class="hero">
         <div class="big-baguette">BAGUETTE 😎</div>
