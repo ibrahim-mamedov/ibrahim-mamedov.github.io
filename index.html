@@ -19,31 +19,26 @@
             flex-direction: column;
             height: 100vh;
         }
+/* Keep the header structure identical */
 header {
     background: linear-gradient(90deg, #fff 0%, #808080 50%, #000 100%);
     padding: 1.2rem 2rem;
     display: flex;
-    align-items: center; /* Vertical centering */
-    height: 60px; /* Force same height as the Templates page */
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    z-index: 10;
-}
-
-.header-left {
-    flex: 1; /* Takes up left space */
-}
-
-.header-right {
-    display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 30px;
-    margin-left: auto; /* Pushes everything to the far right */
+    height: 70px; /* Force a consistent height */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
-/* This empty div acts as a 'ghost' for the missing logo 
-   to keep the navigation links in the exact same spot */
-.logo-spacer {
-    width: 180px; /* Adjust this width to match the size of 'BAGUETTE 😎' */
+/* Hide the French Bread text but keep its 'footprint' so nothing shifts */
+.header-left p.hidden {
+    visibility: hidden;
+}
+
+/* Hide the logo but keep its 'footprint' so the Nav links don't move */
+.baguette-logo.hidden {
+    visibility: hidden;
+    pointer-events: none; /* Can't click/hover it */
 }
 
         .nav-links a {
@@ -107,14 +102,14 @@ header {
 <header>
     <div class="header-left">
         <h1>Ibrahim Mamedov</h1>
+        <p class="hidden">TEST TEXT SOMETHING ABOUT FRENCH BREAD 🥖</p>
     </div>
-    
     <div class="header-right">
         <nav class="nav-links">
             <a href="index.html">Home</a>
             <a href="SCI-Fair-Research-Templates.html">Templates</a>
         </nav>
-        <div class="logo-spacer"></div>
+        <div class="baguette-logo hidden">BAGUETTE 😎</div>
     </div>
 </header>
 
