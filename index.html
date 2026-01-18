@@ -19,21 +19,32 @@
             flex-direction: column;
             height: 100vh;
         }
-
 header {
-            background: linear-gradient(90deg, #fff 0%, #808080 50%, #000 100%);
-            padding: 1.2rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            z-index: 10;
-        }
+    background: linear-gradient(90deg, #fff 0%, #808080 50%, #000 100%);
+    padding: 1.2rem 2rem;
+    display: flex;
+    align-items: center; /* Vertical centering */
+    height: 60px; /* Force same height as the Templates page */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    z-index: 10;
+}
 
-        .header-left h1 { margin:0; font-size: 1.8rem; color: #222; }
-        .header-left p { margin:5px 0 0 0; font-weight: bold; letter-spacing: 1px; color: #444; }
+.header-left {
+    flex: 1; /* Takes up left space */
+}
 
-        .header-right { display: flex; align-items: center; gap: 30px; }
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-left: auto; /* Pushes everything to the far right */
+}
+
+/* This empty div acts as a 'ghost' for the missing logo 
+   to keep the navigation links in the exact same spot */
+.logo-spacer {
+    width: 180px; /* Adjust this width to match the size of 'BAGUETTE 😎' */
+}
 
         .nav-links a {
             color: white;
