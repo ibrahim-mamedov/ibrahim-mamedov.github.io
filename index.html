@@ -1,113 +1,29 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Ibrahim Mamedov's github page</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf_viewer.min.css">
-    
     <style>
-        body { font-family: sans-serif; margin: 40px; background-color: #f4f4f9; }
-        
-        /* The main container for all pages */
-        #pdf-main-container {
-            background: #525659;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px; /* Space between pages */
-            border-radius: 8px;
-        }
-
-        /* Each page gets its own wrapper to hold Canvas + Text Layer */
-        .page-wrapper {
-            position: relative; /* Crucial for positioning text over canvas */
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            background: white;
-        }
-
-        .textLayer {
-            /* Make text transparent so we see the canvas, but can still select it */
-            opacity: 1; 
-            mix-blend-mode: multiply;
-        }
+      body { margin: 0; padding: 20px; font-family: sans-serif; }
+      .viewer-container {
+        width: 100%;
+        height: 800px;
+        border: 1px solid #ccc;
+      }
     </style>
-</head>
-<body>
-
+  </head>
+  <body>
     <h1>TEST TEXT SOMETHING ABOUT FRENCH BREAD</h1>
     <p>BAGUETTE 😎</p>
 
-    <div id="pdf-main-container"></div>
+    <div class="viewer-container">
+      <iframe 
+        id="pdf-viewer"
+        src="pdfjs/web/viewer.html?file=https://raw.githubusercontent.com/ibrahim-mamedov/SCI-Fair-Research-Templates/main/Abstract%20Template.pdf" 
+        width="100%" 
+        height="100%" 
+        style="border: none;">
+      </iframe>
+    </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-
-    <script>
-        const PDF_URL = 'https://raw.githubusercontent.com/ibrahim-mamedov/SCI-Fair-Research-Templates/main/Abstract%20Template.pdf';
-        const workerUrl = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-
-        const pdfjsLib = window['pdfjs-dist/build/pdf'];
-        pdfjsLib.GlobalWorkerOptions.workerSrc = workerUrl;
-
-        const mainContainer = document.getElementById('pdf-main-container');
-
-        // Function to render a single page
-        async function renderPage(pdf, pageNumber) {
-            const page = await pdf.getPage(pageNumber);
-            const scale = 1.5;
-            const viewport = page.getViewport({ scale });
-
-            // Create page wrapper
-            const wrapper = document.createElement('div');
-            wrapper.className = 'page-wrapper';
-            wrapper.style.width = `${viewport.width}px`;
-            wrapper.style.height = `${viewport.height}px`;
-            mainContainer.appendChild(wrapper);
-
-            // Create and add Canvas
-            const canvas = document.createElement('canvas');
-            const context = canvas.getContext('2d');
-            canvas.height = viewport.height;
-            canvas.width = viewport.width;
-            wrapper.appendChild(canvas);
-
-            // Create and add Text Layer
-            const textLayerDiv = document.createElement('div');
-            textLayerDiv.className = 'textLayer';
-            textLayerDiv.style.width = `${viewport.width}px`;
-            textLayerDiv.style.height = `${viewport.height}px`;
-            textLayerDiv.style.position = 'absolute';
-            textLayerDiv.style.top = 0;
-            textLayerDiv.style.left = 0;
-            wrapper.appendChild(textLayerDiv);
-
-            // Render Canvas
-            await page.render({ canvasContext: context, viewport: viewport }).promise;
-
-            // Render Text Layer
-            const textContent = await page.getTextContent();
-            pdfjsLib.renderTextLayer({
-                textContent: textContent,
-                container: textLayerDiv,
-                viewport: viewport,
-                textDivs: []
-            });
-        }
-
-        // Fetch the PDF and start the loop
-        fetch(PDF_URL)
-            .then(response => response.arrayBuffer())
-            .then(async (data) => {
-                const pdf = await pdfjsLib.getDocument({ data: data }).promise;
-                
-                // Loop through all pages in the PDF
-                for (let i = 1; i <= pdf.numPages; i++) {
-                    await renderPage(pdf, i);
-                }
-            })
-            .catch(err => {
-                console.error("Error loading PDF: ", err);
-                mainContainer.innerHTML = `<p style="color:white;">Failed to load PDF: ${err.message}</p>`;
-            });
-    </script>
-</body>
+  </body>
 </html>
